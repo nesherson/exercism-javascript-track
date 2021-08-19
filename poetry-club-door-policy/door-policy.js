@@ -27,7 +27,7 @@
  * @returns {string}
  */
 export function frontDoorResponse(blurb) {
-  throw new Error('Implement the frontDoorResponse function');
+  return blurb.slice(0, 1);
 }
 
 /**
@@ -38,7 +38,9 @@ export function frontDoorResponse(blurb) {
  * @returns {string}
  */
 export function backDoorResponse(blurb) {
-  throw new Error('Implement the backDoorResponse function');
+  const tempStr = blurb.trim();
+  const index = tempStr.length - 1;
+  return tempStr.slice(index, tempStr.length);
 }
 
 /**
@@ -49,7 +51,9 @@ export function backDoorResponse(blurb) {
  * @returns {string}
  */
 function capitalize(word) {
-  throw new Error('Implement the capitalize function');
+  const temp = word.toLowerCase().split('');
+  temp[0] = temp[0].toUpperCase();
+  return temp.join('');
 }
 
 /**
@@ -69,5 +73,6 @@ export function frontDoorPassword(responses) {
  * @returns {string} the password
  */
 export function backDoorPassword(responses) {
-  return capitalize(responses);
+  const polite = 'please';
+  return capitalize(responses).concat(', ', polite);
 }
