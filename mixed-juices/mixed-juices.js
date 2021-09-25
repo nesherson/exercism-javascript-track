@@ -4,6 +4,14 @@
 // the @ts-check directive. It will give you helpful autocompletion when
 // implementing this exercise.
 
+const juicesTimeToMix = {
+  'Pure Strawberry Joy': 0.5,
+  Energizer: 1.5,
+  'Green Garden': 1.5,
+  'Tropical Island': 3,
+  'All or Nothing': 5,
+  default: 2.5,
+};
 /**
  * Determines how long it takes to prepare a certain juice.
  *
@@ -11,8 +19,17 @@
  * @returns {number} time in minutes
  */
 export function timeToMixJuice(name) {
-  throw new Error('Please implement the timeToMixJuice function');
+  if (Object.prototype.hasOwnProperty.call(juicesTimeToMix, name))
+    return juicesTimeToMix[name];
+
+  return juicesTimeToMix.default;
 }
+
+const limeWedgesFromLime = {
+  small: 6,
+  medium: 8,
+  large: 10,
+};
 
 /**
  * Calculates the number of limes that need to be cut
@@ -23,7 +40,16 @@ export function timeToMixJuice(name) {
  * @returns {number} number of limes cut
  */
 export function limesToCut(wedgesNeeded, limes) {
-  throw new Error('Please implement the limesToCut function');
+  let limeCount = 0;
+  let wedgesCount = 0;
+  limes.forEach((lime) => {
+    if (wedgesCount < wedgesNeeded) {
+      wedgesCount += limeWedgesFromLime[lime];
+      limeCount++;
+    }
+  });
+
+  return limeCount;
 }
 
 /**
@@ -34,5 +60,15 @@ export function limesToCut(wedgesNeeded, limes) {
  * @returns {string[]} remaining orders after the time is up
  */
 export function remainingOrders(timeLeft, orders) {
-  throw new Error('Please implement the remainingOrders function');
+  let tempTimeLeft = timeLeft;
+  let tempOrders = [...orders];
+  let index = 0;
+
+  do {
+    tempTimeLeft -= timeToMixJuice(orders[index]);
+    tempOrders.shift();
+    index++;
+  } while (tempTimeLeft > 0 || (tempOrders.length !== 0 && tempTimeLeft > 0));
+
+  return tempOrders;
 }
