@@ -53,7 +53,12 @@ export function ticketStatus(tickets, ticketId) {
  * @returns {string} ticket status
  */
 export function simpleTicketStatus(tickets, ticketId) {
-  throw new Error('Please implement the simpleTicketStatus function.');
+  for (let ticket in tickets) {
+    if (ticket === ticketId && tickets[ticket] !== null) return tickets[ticket];
+    else if (ticket === ticketId && tickets[ticket] === null)
+      return 'invalid ticket !!!';
+  }
+  return 'invalid ticket !!!';
 }
 
 /**
@@ -63,5 +68,6 @@ export function simpleTicketStatus(tickets, ticketId) {
  * @returns {string | undefined} version
  */
 export function gtcVersion(visitor) {
-  throw new Error('Please implement the gtcVersion function.');
+  if (visitor?.gtc?.version) return visitor.gtc.version;
+  else return undefined;
 }
