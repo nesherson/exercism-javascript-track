@@ -43,3 +43,26 @@ export function quantities(layers) {
 
   return totalQuantities;
 }
+
+export function addSecretIngredient(friendsList, myList) {
+  const lastIndex = friendsList.length - 1;
+  myList.push(friendsList[lastIndex]);
+}
+
+export function scaleRecipe(recipe, people) {
+  const newRecipe = {
+    noodles: 0,
+    sauce: 0,
+    mozzarella: 0,
+    meat: 0,
+  };
+
+  for (let i = 1; i <= people; i++) {
+    newRecipe.noodles += recipe.noodles / 2;
+    newRecipe.sauce += recipe.sauce / 2;
+    newRecipe.mozzarella += recipe.mozzarella / 2;
+    newRecipe.meat += recipe.meat / 2;
+  }
+
+  return newRecipe;
+}
